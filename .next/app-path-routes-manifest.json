@@ -1,0 +1,22 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/about/page": "/about",
+  "/achievements/page": "/achievements",
+  "/admissions/page": "/admissions",
+  "/api/achievements/route": "/api/achievements",
+  "/api/admissions/[id]/route": "/api/admissions/[id]",
+  "/api/admissions/route": "/api/admissions",
+  "/api/auth/[...nextauth]/route": "/api/auth/[...nextauth]",
+  "/api/boards/route": "/api/boards",
+  "/api/cities/route": "/api/cities",
+  "/api/news/route": "/api/news",
+  "/api/schools/route": "/api/schools",
+  "/api/states/route": "/api/states",
+  "/dashboard/page": "/dashboard",
+  "/favicon.ico/route": "/favicon.ico",
+  "/login/page": "/login",
+  "/news/page": "/news",
+  "/page": "/",
+  "/schools/page": "/schools"
+}
