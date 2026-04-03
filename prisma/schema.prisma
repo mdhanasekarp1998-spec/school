@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Board {
+  id      String   @id @default(cuid())
+  name    String   @unique
+  schools School[]
+  enquiries AdmissionEnquiry[]
+}
+
+model State {
+  id     String @id @default(cuid())
+  name   String @unique
+  cities City[]
+}
+
+model City {
+  id      String   @id @default(cuid())
+  name    String
+  stateId String
+  state   State    @relation(fields: [stateId], references: [id])
+  schools School[]
+
+  @@unique([name, stateId])
+}
+
+model School {
+  id        String   @id @default(cuid())
+  name      String
+  address   String
+  phone     String
+  boardId   String
+  cityId    String
+  board     Board    @relation(fields: [boardId], references: [id])
+  city      City     @relation(fields: [cityId], references: [id])
+  enquiries AdmissionEnquiry[]
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model AdmissionEnquiry {
+  id           String   @id @default(cuid())
+  academicYear String
+  boardId      String
+  schoolId     String
+  grade        String
+  studentName  String
+  gender       String
+  parentName   String
+  email        String
+  phone        String
+  status       String   @default("NEW")
+  board        Board    @relation(fields: [boardId], references: [id])
+  school       School   @relation(fields: [schoolId], references: [id])
+  createdAt    DateTime @default(now())
+}
+
+model Achievement {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  category    String
+  imageUrl    String?
+  date        DateTime @default(now())
+}
+
+model NewsEvent {
+  id          String   @id @default(cuid())
+  title       String
+  body        String
+  category    String
+  imageUrl    String?
+  isFeatured  Boolean  @default(false)
+  publishedAt DateTime @default(now())
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  role         String   @default("admin")
+  createdAt    DateTime @default(now())
+}
